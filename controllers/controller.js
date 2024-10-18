@@ -64,7 +64,7 @@ const priorAuthorizationCheck = async(req, res) => {
 
 const getAuthorizationList = async(req, res) => {
     try {
-        const requests = await priorAuthorizationRequest.find();
+        const requests = await priorAuthorizationRequest.find().populate('patientId')
         console.log(requests)
         res.status(200).json(requests);
     } catch (error) {

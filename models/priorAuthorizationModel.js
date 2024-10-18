@@ -32,7 +32,7 @@ const priorAuthorizationSchema = new mongoose.Schema({
     },
     patientId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'patientsData',
+        ref: 'Patient',
         required: true
     }
 });
