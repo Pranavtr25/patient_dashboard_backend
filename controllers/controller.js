@@ -5,17 +5,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const jwt = require('jsonwebtoken');
 
 
-const sample = async (req,res) => {
-    console.log("hihiih")
-}
-
 const verifyLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(email,password)
         const provider = await HealthCareProvider.findOne({ email });
-        console.log('provider')
-        console.log(provider)
         if (!provider) {
           return res.status(400).json({ message: 'Invalid email or password' });
         }
@@ -34,8 +27,6 @@ const verifyLogin = async (req, res) => {
 
 const priorAuthorization = async(req,res) => {
     try {
-        console.log('controller reached')
-        console.log(req.body)
         const newRequest = new priorAuthorizationRequest(req.body)
         await newRequest.save()
         res.status(201).json({ message: 'Prior authorization request created successfully', data: newRequest });
@@ -47,10 +38,7 @@ const priorAuthorization = async(req,res) => {
 
 const priorAuthorizationCheck = async(req, res) => {
     try {
-        console.log(`req.params.id : ${req.params.id}`)
         const authorizationRequest = await priorAuthorizationRequest.findOne({ patientId: req.params.id });
-        console.log("123")
-        console.log(authorizationRequest)
         if (authorizationRequest) {
           res.json({ status: authorizationRequest.status });
         } else {
@@ -65,7 +53,6 @@ const priorAuthorizationCheck = async(req, res) => {
 const getAuthorizationList = async(req, res) => {
     try {
         const requests = await priorAuthorizationRequest.find().populate('patientId')
-        console.log(requests)
         res.status(200).json(requests);
     } catch (error) {
         console.error(`error while getting authorization list \n ${error}`)
@@ -92,7 +79,6 @@ const getPatientList = async (req, res) => {
 }
 
 module.exports = {
-    sample,
     verifyLogin,
     priorAuthorization,
     priorAuthorizationCheck,

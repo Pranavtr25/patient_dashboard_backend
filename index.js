@@ -17,6 +17,5 @@ app.use(routes);
 const PORT = process.env.PORT || 3000 
 
 app.listen(PORT, () => {
-    // http://localhost:5173/
     console.log(`server is listening on http://localhost:${PORT}`)
 })

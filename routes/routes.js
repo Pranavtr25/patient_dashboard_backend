@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const {
-    sample,
     verifyLogin,
     priorAuthorization,
     priorAuthorizationCheck,
@@ -9,7 +8,6 @@ const {
     getPatientList
 } = require('../controllers/controller')
 
-router.get('/sample',sample)
 
 router.post('/login',verifyLogin)
 
